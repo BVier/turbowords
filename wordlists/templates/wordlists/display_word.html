@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="word" style="animation-duration: {{ duration }}ms">{{ word }}</div>
+    <div class="word animate" style="animation-duration: {{ duration }}ms">{{ word }}</div>
 {% endblock content %}
 {% block footer %}
-    <div class="button-box">
-        <button class="button primary">
-            <a href="{% url 'test' id 0 %}">Weiter</a>
+    <div class="button-box row">
+        <button class="button red col-4 m-0" onclick="location.href='{% url 'test' id 0 %}'">
+            Falsch
         </button>
-        <button class="button secondary">
-            <a href="{% url 'test' id 1 %}">Richtig und weiter</a>
+        <button class="button grey col-4 m-0" onclick="reloadWord()">
+            Nochmal laden
+        </button>
+        <button class="button green col-4 m-0" onclick="location.href='{% url 'test' id 1 %}'">
+            Richtig
         </button>
     </div>
 {% endblock footer %}

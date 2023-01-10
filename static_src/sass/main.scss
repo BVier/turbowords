@@ -1,6 +1,5 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 
-
 body {
     display: flex;
     flex-direction: column;
@@ -21,15 +20,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    /* flex-wrap: wrap; */
     flex-flow: column;
 }
 
-.footer {
-    height: 10%;
-}
-
-.word {
+.word.animate{
     font-size: 80px;
     opacity: 0;
     animation-name: show;
@@ -39,20 +33,22 @@ body {
     0% {
         opacity: 0;
     }
+
     1% {
         opacity: 1;
     }
+
     99% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
 }
 
 .button {
-    background-color: #4CAF50;
-    /* Green */
+    background-color: $green;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -61,18 +57,28 @@ body {
     display: inline-block;
     font-size: 32px;
     margin: 1%;
+
+    &.list {
+        border-radius: 20px;
+        width: 30%;
+    }
+
+    &.secondary {
+        background-color: #575c63be;
+    }
+
+    &.green{
+        background-color: $teal;
+    }
+    &.red {
+        background-color: $orange-400;
+    }
+    &.grey {
+        background-color: $gray-600;
+    }
 }
 
 a {
     text-decoration: none;
     color: #111;
-}
-
-.button.list {
-    border-radius: 20px;
-    width: 30%;
-}
-
-.button.secondary {
-    background-color: #575c63be;
 }
