@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="main-box">
+        {% if latest_wordlist_list %}
+            {% for wordlist in latest_wordlist_list %}
+                <button class="button list secondary" onclick="location.href='{% url 'wordlist' wordlist.id %}'">
+                    <h3>{{ wordlist }}</h3>
+                    <div>{{ wordlist.count_words }} Wörter</div>
+                </button>
+            {% endfor %}
+        {% else %}
+            <p>Noch keine Wörterliste erfasst</p>
+        {% endif %}
+    </div>
+{% endblock content %}

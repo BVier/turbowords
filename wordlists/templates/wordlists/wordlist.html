@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ wordlist.name }}</h1>
+    <div class="button-box">
+        <button class="button primary">
+            <a href="{% url 'start' wordlist.pk 'Kalle Blomquist' %}">Start</a>
+        </button>
+    </div>
+{% endblock content %}

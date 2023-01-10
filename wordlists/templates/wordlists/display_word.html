@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="word" style="animation-duration: {{ duration }}ms">{{ word }}</div>
+{% endblock content %}
+{% block footer %}
+    <div class="button-box">
+        <button class="button primary">
+            <a href="{% url 'test' id 0 %}">Weiter</a>
+        </button>
+        <button class="button secondary">
+            <a href="{% url 'test' id 1 %}">Richtig und weiter</a>
+        </button>
+    </div>
+{% endblock footer %}
