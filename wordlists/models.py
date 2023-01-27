@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import int_list_validator
+from random import shuffle
 
 # Create your models here.
 
@@ -14,7 +15,7 @@ class Test(models.Model):
     wordlist = Wordlist
     participant = models.CharField(max_length=60)
     duration = models.IntegerField()
-    completed = models.BooleanField()
+    completed = models.BooleanField(default= False)
     word_count = models.IntegerField(default=0)
     correct_count = models.IntegerField(default=0)
     shuffled_words = models.TextField()

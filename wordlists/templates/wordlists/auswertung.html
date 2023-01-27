@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <div>
-    <h2> Super! </h2>
+    <h1 class="text-center"> {{ reaction }} </h1>
     <h2> Du hast {{ count }} von {{ count_all }} Wörtern richtig erkannt! </h2>
 </div>
+{% if reaction == "Logotastisch!" %}
+    <div>
+        <iframe src="https://giphy.com/embed/U4FzeMXldjRuNpgJ99" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </div>
+{% endif %}
 <button class="button list secondary" onclick="location.href='{% url 'index' %}'">
     Startseite
 </button>
