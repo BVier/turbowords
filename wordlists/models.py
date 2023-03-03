@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import int_list_validator
 from random import shuffle
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -26,3 +27,7 @@ class Test(models.Model):
         return word
     def finished(self):
         return self.word_count >= len(self.shuffled_words.splitlines())
+
+class UserWordlists(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    wordlist = models.ForeignKey(Wordlist, related_name="filter", on_delete=models.CASCADE)

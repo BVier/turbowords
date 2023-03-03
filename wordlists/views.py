@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from random import shuffle
@@ -6,14 +8,31 @@ from random import shuffle
 # Create your views here.
 
 
+def startpage(request):
+    login_form = LoginForm()
+    return render(request, 'wordlists/login.html', {'login_form': login_form})
+
+
+def login_user(request):
+    print(request)
+    if request.method == 'POST':
+        user = authenticate(
+            request, username=request.POST['username'], password=request.POST['password'])
+        if user is not None:
+            login(request, user)
+            return index(request)
+    return startpage(request)
+
+@login_required
 def index(request):
-    wordlist_list = Wordlist.objects.order_by('-name')[:5]
+    wordlist_list = Wordlist.objects.filter(filter__user=request.user).order_by('-name')[:5]
     for wordlist in wordlist_list:
         wordlist.count_words = len(wordlist.words.splitlines())
     context = {'latest_wordlist_list': wordlist_list}
     return render(request, 'wordlists/index.html', context)
 
 
+@login_required
 def wordlist(request, id):
     current_list = get_object_or_404(Wordlist, pk=id)
     current_list.id = id
@@ -23,6 +42,7 @@ def wordlist(request, id):
     return render(request, 'wordlists/wordlist.html', context)
 
 
+@login_required
 def test(request, id, success):
     test = get_object_or_404(Test, pk=id)
     if (success):
@@ -40,9 +60,10 @@ def test(request, id, success):
     return render(request, 'wordlists/display_word.html', context)
 
 
+@login_required
 def start_test(request):
-    if request.method == 'GET':
-        form = TestForm(request.GET)
+    if request.method == 'POST':
+        form = TestForm(request.POST)
         if form.is_valid():
             wordlist = get_object_or_404(Wordlist, pk=form['wordlist'].value())
             new_test = init_test(
