@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h1>
+        {% if wordlist %}
+            Liste bearbeiten
+        {% else %}
+            Neue Liste
+        {% endif %}
+    </h1>
+    <form action="{% if wordlist %} {% url 'save-list' wordlist.id %} {% else %}{% url 'save-new-list' %}{% endif %}"
+          method="post">
+        {% csrf_token %}
+        {{ editor_form|crispy }}
+        <button type="submit" class="btn btn-primary">Speichern</button>
+    </form>
+{% endblock content %}

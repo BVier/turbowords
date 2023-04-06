@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h1>{{ wordlist.name }}</h1>
-<form action="/start-test/" method="post"> 
-    {% csrf_token %}
-    {{ test_form|crispy }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <h1>{{ wordlist.name }}</h1>
+    <form action="/start-test/" method="post">
+        {% csrf_token %}
+        {{ test_form|crispy }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 {% endblock content %}
+{% block footer %}
+    <button class="button primary"
+            onclick="location.href='{% url 'index' %}'">Zurück</button>
+    <button class="button primary"
+            onclick="location.href='{% url 'edit-wordlist' wordlist.id %}'">Bearbeiten</button>
+    <button class="button alert"
+            onclick="location.href='{% url 'delete-wordlist' wordlist.id %}'">Löschen</button>
+{% endblock footer %}

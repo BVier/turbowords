@@ -23,9 +23,11 @@ def login_user(request):
             return index(request)
     return startpage(request)
 
+
 @login_required
 def index(request):
-    wordlist_list = Wordlist.objects.filter(filter__user=request.user).order_by('-name')[:5]
+    wordlist_list = Wordlist.objects.filter(
+        filter__user=request.user).order_by('-name')[:5]
     for wordlist in wordlist_list:
         wordlist.count_words = len(wordlist.words.splitlines())
     context = {'latest_wordlist_list': wordlist_list}
@@ -88,3 +90,45 @@ def init_test(wordlist, participant, duration):
     shuffle(words)
     new_test.shuffled_words = "\n".join(words)
     return new_test
+
+
+@login_required
+def create_wordlist(request):
+    editor_form = WordlistForm()
+    return render(request, 'wordlists/wordlist_editor.html', {'editor_form': editor_form, 'wordlist.id': 0})
+
+
+def edit_wordlist(request, id):
+    wordlist = get_object_or_404(Wordlist, pk=id)
+    editor_form = WordlistForm(instance=wordlist)
+    return render(request, 'wordlists/wordlist_editor.html', {'editor_form': editor_form, 'wordlist': wordlist})
+
+def save_new_list(request):
+    form = WordlistForm(request.POST)
+    if not form or not form.is_valid:
+        return render(request, 'wordlists/wordlist_editor.html', {'editor_form': form, 'wordlist.id': id})
+    wordlist = form.save()
+    mapping = UserWordlists()
+    mapping.wordlist = wordlist
+    mapping.user = request.user
+    mapping.save()
+    return index(request)
+
+
+def save_list(request, id):
+    form = WordlistForm(request.POST)
+    if not form or not form.is_valid:
+        return render(request, 'wordlists/wordlist_editor.html', {'editor_form': form, 'wordlist.id': id})
+    existingList = Wordlist(pk=id)
+    form = WordlistForm(request.POST, instance=existingList)
+    form.save()
+    return index(request)
+
+def delete_wordlist(request, id):
+    wordlist = get_object_or_404(Wordlist, pk=id)
+    mapping = get_object_or_404(
+        UserWordlists, user=request.user, wordlist=wordlist)
+    mapping.delete()
+    if UserWordlists.objects.filter(wordlist=wordlist).count():
+        wordlist.delete()
+    return index(request)

@@ -3,17 +3,17 @@
 ### Startseite ordentlich formattieren
 - [x] Buttons
 - [x] Liste auswählen
-- [ ] Bearbeiten - Menü
+- [x] Bearbeiten - Menü
 
 ### Listenübersicht
-- [ ] Zurück Button
+- [x] Zurück Button
 - [x] Teilnehmername
 - [x] ms-Einstellung
 
 ### Bearbeiten
-- [ ] Liste bearbeiten
-- [ ] Liste löschen
-- [ ] Liste hinzufügen
+- [x] Liste bearbeiten
+- [x] Liste löschen
+- [x] Liste hinzufügen
 
 ### Wort-Seite:
 - [x] Buttons in Reihenfolge
@@ -23,7 +23,15 @@
 - [x] schön und 
 - [x] Button auf Startseite
 
+### Patienten
+- [ ] Patienten-Seite nach Login
+- [ ] Patienten erstellen
+- [ ] Patienten wählen
+- [ ] index: Patienten ändern
+
 ### User Authentication
+- [x] Login
+- [ ] Logout
 - [ ] User erstellen
 - [ ] Gruppen
 - [ ] Berechtigungen

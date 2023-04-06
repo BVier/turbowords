@@ -1,5 +1,4 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
-
 body {
     display: flex;
     flex-direction: column;
@@ -13,7 +12,8 @@ body {
     background-color: #AAC0AF;
 }
 
-.content {
+.content,
+.main-box {
     flex: 1;
     overflow: auto;
     margin: 0 10%;
@@ -23,7 +23,7 @@ body {
     flex-flow: column;
 }
 
-.word.animate{
+.word.animate {
     font-size: 80px;
     opacity: 0;
     animation-name: show;
@@ -33,15 +33,12 @@ body {
     0% {
         opacity: 0;
     }
-
     1% {
         opacity: 1;
     }
-
     99% {
         opacity: 1;
     }
-
     100% {
         opacity: 0;
     }
@@ -57,17 +54,14 @@ body {
     display: inline-block;
     font-size: 32px;
     margin: 1%;
-
     &.list {
         border-radius: 20px;
-        width: 30%;
+        // width: 30%;
     }
-
     &.secondary {
         background-color: #575c63be;
     }
-
-    &.green{
+    &.green {
         background-color: $teal;
     }
     &.red {

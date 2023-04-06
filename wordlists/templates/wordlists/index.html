@@ -12,4 +12,7 @@
             <p>Noch keine Wörterliste erfasst</p>
         {% endif %}
     </div>
+    <button class="button primary" onclick="location.href='{% url 'create-wordlist' %}'">
+        Neue Liste
+    </button>
 {% endblock content %}

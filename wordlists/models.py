@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Wordlist(models.Model):
     name = models.CharField(max_length=100, default="Liste")
     words = models.TextField()
-    duration = models.IntegerField()
+    duration = models.IntegerField(default=1000)
     def __str__(self):
         return self.name
 
