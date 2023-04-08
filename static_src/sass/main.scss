@@ -1,3 +1,5 @@
+// cd .\static_src\; npm run compile:css; cd .. ; python manage.py collectstatic
+
 @import 'node_modules/bootstrap/scss/bootstrap';
 body {
     display: flex;
@@ -12,8 +14,7 @@ body {
     background-color: #AAC0AF;
 }
 
-.content,
-.main-box {
+.content {
     flex: 1;
     overflow: auto;
     margin: 0 10%;
@@ -23,6 +24,17 @@ body {
     flex-flow: column;
 }
 
+.main-box {
+    width: 80%;
+    display: flex;
+    flex: 1 1 auto;
+    gap: 1rem;
+    overflow: auto;
+    margin: 0 10%;
+    align-items: center;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
 .word.animate {
     font-size: 80px;
     opacity: 0;
@@ -56,7 +68,6 @@ body {
     margin: 1%;
     &.list {
         border-radius: 20px;
-        // width: 30%;
     }
     &.secondary {
         background-color: #575c63be;

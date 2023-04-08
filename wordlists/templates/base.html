@@ -4,18 +4,24 @@
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Turbo Wörter </title>
+        <title>Turbo Wörter</title>
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap"
               rel="stylesheet"/>
         <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
-        <script src="{% static 'js/display_word.js' %}"></script> 
+        <script src="{% static 'js/display_word.js' %}"></script>
     </head>
     <body>
         <div class="header">
             {% block header %}
-                <h1>Turbowörter</h1>
+                <div class="d-flex justify-content-center">
+                    <h1>Turbowörter</h1>
+                    <div>
+                        <i class="bi bi-people-fill"></i>
+                        <i class="bi bi-box-arrow-right"></i>
+                    </div>
+                </div>
             {% endblock header %}
         </div>
         <div class="content">
@@ -23,7 +29,8 @@
             {% endblock content %}
         </div>
         <div class="footer">
-            {% block footer %}{% endblock footer %}
+            {% block footer %}
+            {% endblock footer %}
         </div>
     </body>
 </html>

@@ -8,7 +8,7 @@
             Neue Liste
         {% endif %}
     </h1>
-    <form action="{% if wordlist %} {% url 'save-list' wordlist.id %} {% else %}{% url 'save-new-list' %}{% endif %}"
+    <form action="{% if wordlist %} {% url 'edit-list' wordlist.id %} {% else %}{% url 'create-wordlist' %}{% endif %}"
           method="post">
         {% csrf_token %}
         {{ editor_form|crispy }}

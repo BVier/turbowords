@@ -24,10 +24,11 @@
 - [x] Button auf Startseite
 
 ### Patienten
-- [ ] Patienten-Seite nach Login
-- [ ] Patienten erstellen
-- [ ] Patienten wählen
+- [x] Patienten-Seite nach Login
+- [x] Patienten erstellen
+- [x] Patienten wählen
 - [ ] index: Patienten ändern
+- [ ] Nachricht auf Patienten-Seite (Patient gibt es schon, Bitte zuerst Patient wählen)
 
 ### User Authentication
 - [x] Login

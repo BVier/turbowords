@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="main-box">
+        {% if patient_list %}
+            {% for patient in patient_list %}
+                <button class="button list secondary"
+                        onclick="location.href='{% url 'set-patient' patient.id %}'">
+                    <h3>{{ patient.Vorname }}</h3>
+                    <div>{{ patient.Nachname }}</div>
+                </button>
+            {% endfor %}
+        {% else %}
+            <p>Noch keine Patienten erfasst</p>
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% comment %} <button class="button primary"
+                        onclick="location.href='{% url 'index' %}'">Ohne Patient fortfahren</button> {% endcomment %}
+            </div>
+            <div class="col">
+                <form action="{% url 'add-patient' %}"
+                      method="post">
+                    {% csrf_token %}
+                    {{ patient_form|crispy }}
+                    <button type="submit" class="btn btn-primary">Speichern</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
