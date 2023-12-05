@@ -21,4 +21,4 @@ class WordlistForm(forms.ModelForm):
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ['Vorname', 'Nachname']
+        fields = ['Vorname', 'Nachname', 'Anzeige (in ms)']

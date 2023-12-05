@@ -19,7 +19,11 @@ class Patient (models.Model):
     first_name = models.CharField(max_length=60, name="Vorname")
     last_name = models.CharField(max_length=60, name="Nachname")
     profile_cat = models.ImageField(name="Profilbild")
+    duration = models.IntegerField(default=1000)
+    duration_time = models.IntegerField(default=1000, verbose_name="Anzeigedauer (in ms)")
     therapist = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.Vorname + " " + self.Nachname
     
 class Test(models.Model):
     wordlist = Wordlist
@@ -36,3 +40,5 @@ class Test(models.Model):
         return word
     def finished(self):
         return self.word_count >= len(self.shuffled_words.splitlines())
+    def __str__(self):
+        return self.wordlist + " " + self.patient

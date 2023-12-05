@@ -40,12 +40,23 @@ def index(request):
 
 @login_required
 def wordlist(request, id):
-    current_list = get_object_or_404(Wordlist, pk=id)
-    test_form = TestForm()
-    context = {'wordlist': current_list, 'test_form': test_form}
-    response = render(request, 'wordlists/wordlist.html', context)
+    wordlist = get_object_or_404(Wordlist, pk=id)
+    # test_form = TestForm()
+    # context = {'wordlist': current_list, 'test_form': test_form}
+    # response = render(request, 'wordlists/wordlist.html', context)
+    # response = start_test(request)
+    patient = get_patient_from_cookie(request)
+    if not patient:
+        return patients()  # TODO: with error message
+    # wordlist = get_wordlist_from_cookie(request)
+    if not wordlist:
+        return index()  # TODO: with error message
+    new_test = init_test(wordlist, patient, patient.duration)
+    context = {'word': new_test.next_word(), 'id': new_test.pk,
+               'duration': new_test.duration}
+    response = render(request, 'wordlists/display_word.html', context)
     response.set_cookie('wordlist', id)
-    return response
+    return start_test(response)
 
 
 @login_required
@@ -68,23 +79,23 @@ def test(request, id, success):
 
 @login_required
 def start_test(request):
-    if request.method == 'POST':
-        form = TestForm(request.POST)
-        if form.is_valid():
-            patient = get_patient_from_cookie(request)
-            if not patient:
-                return patients()  # TODO: with error message
-            wordlist = get_wordlist_from_cookie(request)
-            if not wordlist:
-                return patients()  # TODO: with error message
-            new_test = init_test(
-                wordlist, patient, form['duration'].value())
-            context = {'word': new_test.next_word(), 'id': new_test.pk,
-                       'duration': new_test.duration}
-            return render(request, 'wordlists/display_word.html', context)
-    else:
-        form = TestForm()
-    return render(request, 'wordlists/wordlist.html', {start_test: form})
+    # if request.method == 'POST':
+    #     form = TestForm(request.POST)
+    #     if form.is_valid():
+    patient = get_patient_from_cookie(request)
+    if not patient:
+        return patients()  # TODO: with error message
+    wordlist = get_wordlist_from_cookie(request)
+    if not wordlist:
+        return patients()  # TODO: with error message
+    new_test = init_test(
+        wordlist, patient, patient.duration)
+    context = {'word': new_test.next_word(), 'id': new_test.pk,
+               'duration': new_test.duration}
+    return render(request, 'wordlists/display_word.html', context)
+    # else:
+    #     form = TestForm()
+    # return render(request, 'wordlists/wordlist.html', {start_test: form})
 
 
 def init_test(wordlist, patient, duration):
@@ -162,7 +173,7 @@ def add_patient(request):
     patient = form.save(commit=False)
     patient.therapist = request.user
     if Patient.objects.filter(therapist=patient.therapist, Vorname=patient.Vorname, Nachname=patient.Nachname).count() > 0:
-        return patients(request) 
+        return patients(request)
     patient.save()
     return patients(request)
 
@@ -187,9 +198,12 @@ def set_patient(request, patientId):
 """
 Helper methods
 """
+
+
 def get_wordlist_from_cookie(request):
     wordlistId = request.COOKIES.get('wordlist')
     return Wordlist.objects.filter(pk=wordlistId).first()
+
 
 def get_patient_from_cookie(request):
     patientId = request.COOKIES.get('patientId')
