@@ -5,7 +5,7 @@
     <form action="/start-test/" method="post">
         {% csrf_token %}
         {{ test_form|crispy }}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="button primary">Jetzt starten</button>
     </form>
 {% endblock content %}
 {% block footer %}

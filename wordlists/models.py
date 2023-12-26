@@ -14,7 +14,6 @@ class Wordlist(models.Model):
 
 class Test(models.Model):
     wordlist = Wordlist
-    participant = models.CharField(max_length=60)
     duration = models.IntegerField()
     completed = models.BooleanField(default= False)
     word_count = models.IntegerField(default=0)
@@ -29,5 +28,5 @@ class Test(models.Model):
         return self.word_count >= len(self.shuffled_words.splitlines())
 
 class UserWordlists(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     wordlist = models.ForeignKey(Wordlist, related_name="filter", on_delete=models.CASCADE)

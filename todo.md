@@ -35,3 +35,11 @@
 - [ ] User erstellen
 - [ ] Gruppen
 - [ ] Berechtigungen
+
+
+### Befehle:
+
+- Migration & Start:
+```py manage.py makemigrations wordlists; py manage.py migrate; py manage.py runserver```
+- Style update & Start: 
+```cd .\static_src\; npm run compile:css; cd .. ; python manage.py collectstatic; python manage.py runserver```

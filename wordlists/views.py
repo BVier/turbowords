@@ -69,7 +69,7 @@ def start_test(request):
         if form.is_valid():
             wordlist = get_object_or_404(Wordlist, pk=form['wordlist'].value())
             new_test = init_test(
-                wordlist, form['teilnehmer'].value(), form['duration'].value())
+                wordlist, form['duration'].value())
             print(new_test)
             new_test.save()
             context = {'word': new_test.next_word(), 'id': new_test.pk,
@@ -81,10 +81,9 @@ def start_test(request):
     return render(request, 'wordlists/wordlist.html', {start_test: form})
 
 
-def init_test(wordlist, participant, duration):
+def init_test(wordlist, duration):
     new_test = Test()
     new_test.wordlist = wordlist
-    new_test.participant = participant
     new_test.duration = duration
     words = wordlist.words.splitlines()
     shuffle(words)
